@@ -11,7 +11,7 @@ def string_properties():
     string_length = len(text)
     first_char = text[0]
     last_char = text[-1]
-    rand_first_num = randint(0, string_length // 2)
+    rand_first_num = randint(1, string_length // 2)
     random_middle_text = text[rand_first_num:rand_first_num + 3]
     return f'''Twoj tekst: {text}
 Dlugosc tekstu: {string_length}
