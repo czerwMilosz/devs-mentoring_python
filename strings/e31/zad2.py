@@ -1,33 +1,36 @@
-def kot_ma_ale():
+def weryfikacja_kotkow():
     while True:
         try:
-            kotki = int(input('Ile kotow ma Ala? '))
-            if kotki > 0:
-                break #przerywa petle przy poprawnym typie zmiennej (int)
+            ilosc_kotkow = int(input('Ile kotow ma Ala? '))
+            if ilosc_kotkow > 0:
+                break  # przerywa petle przy poprawnym typie zmiennej (int)
             else:
-                print('Kotki to pozytywne zwierzatka, podaj wartosc powyzej 0')
+                print('Ala zawsze ma jakies kotki, podaj wartosc powyzej 0')
         except ValueError:
-            print('Nie utrudniaj mi zycia, podaj poprawna liczbe..') #nie dopuszcza innych typow oprocz int
+            print('Nie utrudniaj mi zycia, podaj poprawna ilosc..')  # Nie przerywa programu z bledem
+    return ilosc_kotkow
 
-    wiecej_magicznych_kotkow = kotki + 3
-    magiczne_kotki = f'Teraz Ala ma juz {wiecej_magicznych_kotkow} kotow'.strip()
-    podzielone_kotki = magiczne_kotki.replace(' ', ', ')
-    drabinka_kotkow = magiczne_kotki.replace(' ', '\n')
-
-    print('Dzisiaj Ala znalazla jeszcze 3 koty w krainie czarow')
-    print(magiczne_kotki)
-    print(podzielone_kotki)
-    print(drabinka_kotkow)
-
-    if not magiczne_kotki.islower():
-        print('Kotki sa za duze.. trzeba je zmniejszyc')
-        male_magiczne_kotki = magiczne_kotki.lower()
-        print(male_magiczne_kotki)
+def male_kotki(kotki: str):
+    if not kotki.islower():
+        return kotki.lower()
     else:
-        print('Nic nie trzeba zmieniac, kotki sa male')
+        return kotki
 
+def kot_ma_ale():
+    kotki_ali = weryfikacja_kotkow()
+    wiecej_magicznych_kotkow = 'Dzisiaj Ala znalazla jeszcze 3 koty w krainie czarow'
+    ilosc_magicznych_kotkow = kotki_ali + 3
+    magiczne_kotki = f'Teraz Ala ma juz {ilosc_magicznych_kotkow} kotow'
+    podzielone_kotki = ', '.join(magiczne_kotki.split()) #split dzieli na liste, join laczy elementy listy
+    drabinka_kotkow = magiczne_kotki.replace(' ', '\n') #tez mozna uzyc split ale chcialem pokazac druga opcje
+    male_magiczne_kotki = male_kotki(magiczne_kotki)
     wiekszy_kotek = male_magiczne_kotki.capitalize()
-    print(f'Powiekszamy kotka: {wiekszy_kotek}')
-    return 'Piekny byl to program, nie zapomne go nigdy (/^-^)o日日o(^0^|)'
+
+    return f'''{wiecej_magicznych_kotkow}
+{magiczne_kotki}
+{podzielone_kotki}
+{drabinka_kotkow}
+{male_magiczne_kotki}
+{wiekszy_kotek}'''
 
 print(kot_ma_ale())
