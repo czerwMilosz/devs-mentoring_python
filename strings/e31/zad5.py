@@ -1,6 +1,5 @@
 def get_input_from_user():
     user_input = input('Wprowadz tekst ')
-    user_input = '     ' + user_input
     return user_input
 
 def add_white_space(user_input = get_input_from_user()):
