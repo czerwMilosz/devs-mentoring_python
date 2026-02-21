@@ -3,11 +3,11 @@ def weryfikacja_kotkow():
         try:
             ilosc_kotkow = int(input('Ile kotow ma Ala? '))
             if ilosc_kotkow > 0:
-                break  # przerywa petle przy poprawnym typie zmiennej (int)
+                break  # przerywa petle gdy uzytkownik podal wartosc > 0
             else:
                 print('Ala zawsze ma jakies kotki, podaj wartosc powyzej 0')
         except ValueError:
-            print('Nie utrudniaj mi zycia, podaj poprawna ilosc..')  # Nie przerywa programu z bledem
+            print('Nie utrudniaj mi zycia, podaj poprawna ilosc..')  # Nie przerywa programu z bledem, tylko wyswietla komunikat, przez co petla caly czas dziala i ponownie mozna wpisac wartosc
     return ilosc_kotkow
 
 def male_kotki(kotki: str):
