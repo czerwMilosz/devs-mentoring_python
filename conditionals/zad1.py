@@ -1,4 +1,4 @@
-def get_intput():
+def get_input():
     print("Podaj dlugosci bokow trojkata")
     side_a = float(input("Podaj dlugosc boku a: "))
     side_b = float(input("Podaj dlugosc boku b: "))
@@ -17,7 +17,7 @@ def pythagorean_check(sides: tuple): #sprawdza czy trojkat spelnia zalozenia
         return False
 
 def main():
-    sides = get_intput()
+    sides = get_input()
     if pythagorean_check(sides):
         return f'Trójkąt jest prostokątny'
     else:
