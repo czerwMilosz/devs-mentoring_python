@@ -11,7 +11,7 @@ def sort_tuple_desc(sides: tuple): #sortuje tuple desc
 
 def pythagorean_check(sides: tuple): #sprawdza czy trojkat spelnia zalozenia
     sorted_sides = sort_tuple_desc(sides)
-    if sorted_sides[1] ** 2 + sorted_sides[2] **2  == sorted_sides[0] ** 2:
+    if sorted_sides[1] **2 + sorted_sides[2] **2  == sorted_sides[0] **2:
         return True
     else:
         return False
@@ -19,8 +19,8 @@ def pythagorean_check(sides: tuple): #sprawdza czy trojkat spelnia zalozenia
 def main():
     sides = get_input()
     if pythagorean_check(sides):
-        return f'Trójkąt jest prostokątny'
+        print('Trojkat jest prostokatny')
     else:
-        return f'Trójkąt nie jest prostokątny'
+        print('Trojkat nie jest prostokatny')
 
-print(main())
+main()
