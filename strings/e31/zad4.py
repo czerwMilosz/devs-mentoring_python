@@ -7,8 +7,7 @@ def pij_mleko():
             return text
 
 
-def bedziesz_wielki():
-    user_input = pij_mleko().lower()
+def bedziesz_wielki(user_input = pij_mleko().lower()):
     check_string = ''
 
     for l in user_input: #sprawdza czy tekst zawiera litery do powiekszenia

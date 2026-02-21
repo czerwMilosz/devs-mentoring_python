@@ -6,8 +6,7 @@ def input_min_length(length = 7):
         text = input("Wprowadz tekst (min 7 znakow): ")
     return text
 
-def string_properties():
-    text = input_min_length()
+def string_properties(text = input_min_length()):
     string_length = len(text)
     first_char = text[0]
     last_char = text[-1]
