@@ -16,7 +16,8 @@ def male_kotki(kotki: str):
     else:
         return kotki
 
-def kot_ma_ale(kotki_ali = weryfikacja_kotkow()):
+def kot_ma_ale():
+    kotki_ali = weryfikacja_kotkow()
     wiecej_magicznych_kotkow = 'Dzisiaj Ala znalazla jeszcze 3 koty w krainie czarow'
     ilosc_magicznych_kotkow = kotki_ali + 3
     magiczne_kotki = f'Teraz Ala ma juz {ilosc_magicznych_kotkow} kotow'
@@ -25,11 +26,11 @@ def kot_ma_ale(kotki_ali = weryfikacja_kotkow()):
     male_magiczne_kotki = male_kotki(magiczne_kotki)
     wiekszy_kotek = male_magiczne_kotki.capitalize()
 
-    return f'''{wiecej_magicznych_kotkow}
+    print (f'''{wiecej_magicznych_kotkow}
 {magiczne_kotki}
 {podzielone_kotki}
 {drabinka_kotkow}
 {male_magiczne_kotki}
-{wiekszy_kotek}'''
+{wiekszy_kotek}''')
 
-print(kot_ma_ale())
+kot_ma_ale()

@@ -1,12 +1,12 @@
 from random import randint
 
-def input_min_length(length = 7):
+def input_user_text(length = 7):
     text = input("Wprowadz tekst (min 7 znakow): ").strip()
     while len(text) < length:
         text = input("Wprowadz tekst (min 7 znakow): ")
     return text
 
-def string_properties(text = input_min_length()):
+def string_properties(text):
     string_length = len(text)
     first_char = text[0]
     last_char = text[-1]
@@ -19,6 +19,9 @@ Ostatnia litera: {last_char}
 Losowe 3 znaki ze srodka tesktu: {random_middle_text}
 '''
 
-print(string_properties())
+def main():
+    user_input = input_user_text()
+    result = string_properties(user_input)
+    print(result)
 
-
+main()

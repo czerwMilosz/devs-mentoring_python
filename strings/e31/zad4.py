@@ -7,18 +7,24 @@ def pij_mleko():
             return text
 
 
-def bedziesz_wielki(user_input = pij_mleko().lower()):
+def bedziesz_wielki(text):
+    lower_text = text.lower()
     check_string = ''
 
-    for l in user_input: #sprawdza czy tekst zawiera litery do powiekszenia
+    for l in lower_text: #sprawdza czy tekst zawiera litery do powiekszenia
         if l.isalpha():  #na poczatku chcialem tu uzyc zakresu  i kodow ASCII z ord() ale to nie wykrywalo polskich znakow
             break
         else:
             check_string += l
 
-    if user_input == check_string:
-        return f'Tekst nie zawiera liter, to czego sie innego sie spodziewales: {user_input}'
+    if lower_text == check_string:
+        return f'Tekst nie zawiera liter, to czego sie innego sie spodziewales: {lower_text}'
     else:
-        return f'Twoj powiekszony tekst: {user_input.upper()}'
+        return f'Twoj powiekszony tekst: {lower_text.upper()}'
 
-print(bedziesz_wielki())
+def main():
+    user_input = pij_mleko()
+    result = bedziesz_wielki(user_input)
+    print(result)
+
+main()
