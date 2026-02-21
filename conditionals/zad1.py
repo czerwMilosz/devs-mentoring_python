@@ -5,12 +5,8 @@ def get_input():
     side_c = float(input("Podaj dlugosc boku c: "))
     return (side_a, side_b, side_c)
 
-def sort_tuple_desc(sides: tuple): #sortuje tuple desc
-    sorted_tuple = tuple(sorted(sides, reverse=True))
-    return sorted_tuple
-
 def pythagorean_check(sides: tuple): #sprawdza czy trojkat spelnia zalozenia
-    sorted_sides = sort_tuple_desc(sides)
+    sorted_sides = sorted(sides, reverse=True)
     if sorted_sides[1] **2 + sorted_sides[2] **2  == sorted_sides[0] **2:
         return True
     else:
