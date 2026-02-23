@@ -1,22 +1,22 @@
 def get_user_moves():
-    result = []
+    player_moves = []
     game_options = {'kamien', 'papier', 'nozyce'} #dozwolone ruchy w grze
     player_number = 1
-    while len(result) < 2: # petla dziala dopoki nie zbierzemy 2 poprawnych ruchow
+    while len(player_moves) < 2: # petla dziala dopoki nie zbierzemy 2 poprawnych ruchow
         # czyszcze input zeby uniknac problemow z wielkoscia liter i spacjami
         user_input = input(f'Gracz {player_number}, wybierz kamien, papier lub nozyce: ').strip().lower()
 
         # sprawdzam czy wpisany ruch jest poprawny, a nastepnie dodawany do listy
         if user_input in  game_options:
-            result.append(user_input)
+            player_moves.append(user_input)
             player_number += 1
         else:
             print('Wprowadziles zla wartosc')
-    return result # zwracam ruchy obu graczy
+    return player_moves # zwracam ruchy obu graczy
 
 
-def get_round_outcome(result:list):
-    player1_move, player2_move = result[0], result[1] # wyciagam ruchy z listy
+def get_round_outcome(player_moves:list):
+    player1_move, player2_move = player_moves[0], player_moves[1] # wyciagam ruchy z listy
     if player1_move == player2_move: # remis jesli ruchy sa takie same
         return 'draw'
     # przypadki kiedy wygrywa gracz 1
@@ -47,8 +47,8 @@ def format_game_score(player1:int, player2:int, draw_count:int):
     return(f'Gracz 1: {player1}\nGracz 2: {player2}\nRemis: {draw_count}\n')
 
 def play_game(round_count: int):
-    player1_result = 0
-    player2_result = 0
+    player1_score = 0
+    player2_score = 0
     draw_count = 0
     # petla wykona sie tyle razy ile rund wybral uzytkownik
     for i in range(1, round_count + 1):
@@ -60,24 +60,24 @@ def play_game(round_count: int):
         if round_outcome == 'draw':
             draw_count += 1
             print('Remis')
-            print(format_game_score(player1_result, player2_result, draw_count))
+            print(format_game_score(player1_score, player2_score, draw_count))
 
         elif round_outcome == 'player1':
-            player1_result += 1
+            player1_score += 1
             print('Punkt dla Gracz 1')
-            print(format_game_score(player1_result, player2_result, draw_count))
+            print(format_game_score(player1_score, player2_score, draw_count))
 
         elif round_outcome == 'player2':
-            player2_result += 1
+            player2_score += 1
             print('Punkt dla Gracz 2')
-            print(format_game_score(player1_result, player2_result, draw_count))
+            print(format_game_score(player1_score, player2_score, draw_count))
 
-    return [player1_result, player2_result, draw_count]
+    return [player1_score, player2_score, draw_count]
 
-def get_game_winner(result:list):
-    player1_score = result[0]
-    player2_score = result[1]
-    draw_score = result[2]
+def get_game_winner(score:list):
+    player1_score = score[0]
+    player2_score = score[1]
+    draw_score = score[2]
 
     # sprawdzam kto ma wiecej punktow
     if player1_score > player2_score:
