@@ -1,6 +1,6 @@
 from random import randint
 
-def get_user_moves():
+def get_user_move():
     game_options = {'orzel', 'reszka', 'stop'} #dozwolone ruchy w grze
     while True: # petla dziala dopoki nie zbierzemy 2 poprawnych ruchow
         # czyszcze input zeby uniknac problemow z wielkoscia liter i spacjami
@@ -19,7 +19,7 @@ def flip_coin():
     else:
         return 'reszka'
 
-def get_winner(user_move: str,coin: str):
+def get_round_winner(user_move: str,coin: str):
     if user_move == coin:
         return 'player'
     else:
@@ -42,30 +42,40 @@ def countdown():
     for i in range(3,0,-1):
         print(i)
 
-def score_counter(winner: str, score: list):
+def update_score(winner: str, score: list):
     if winner == 'player':
         score[0] += 1
-    elif winner == 'computer':
+    else:
         score[1] += 1
     return score
 
+def format_game_score(user_score: int, computer_score: int):
+    return f'Gracz: {user_score} Komputer: {computer_score}'
+
+def get_game_winner(user_score: int, computer_score: int):
+    if user_score > computer_score:
+        return 'Wygrales!'
+    elif user_score < computer_score:
+        return 'Komputer wygral!'
+    else:
+        return 'Remis!'
 
 def play_game(rounds: int):
     score = [0,0]
     for i in range(rounds):
-        user_move = get_user_moves()
-        if user_move == 'stop': #tutaj przerobic to na funkcje
+        user_move = get_user_move()
+        if user_move == 'stop': #jezeli uzytkownik wybral stop, przerywa gre
             print('Gra przerwana')
-            return score
-        coin = flip_coin()
+            break
         countdown()
-        winner = get_winner(user_move, coin)
-        score = score_counter(winner,score)
+        coin = flip_coin()
+        winner = get_round_winner(user_move, coin)
+        score = update_score(winner,score)
         print(coin)
-        print(f'Gracz: {score[0]} Komputer: {score[1]}')
-    return f'Koniec gry!\nGracz: {score[0]} Komputer: {score[1]}'
+        print(format_game_score(score[0],score[1]))
+    return f'\nKoniec gry!\n{get_game_winner(score[0], score[1])}\n{format_game_score(score[0],score[1])}'
 
-#dodac jeszcze funkcje z formatem wyswietlania wyniku
+
 
 def main():
     rounds = get_number_of_rounds()
