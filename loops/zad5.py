@@ -1,4 +1,13 @@
-def get_divisor():
+def get_divisor() -> int:
+    """
+        Prompt the user to enter a numeric range.
+
+        The function asks for start and end values and ensures
+        they are not equal.
+
+        Returns:
+            dict: A dictionary with keys 'start' and 'end'.
+        """
     while True:
         try:
             divisor = int(input("Podaj dzielnik: "))
@@ -9,7 +18,15 @@ def get_divisor():
         except ValueError:
             print('Podaj poprawna wartosc')
 
-def get_range():
+def get_range() -> dict:
+    """
+       Prompt the user to enter a non-zero integer divisor.
+
+       Repeats the input request until a valid non-zero integer is provided.
+
+       Returns:
+           int: A non-zero integer entered by the user.
+       """
     user_range = {}
     while len(user_range) < 2:
         try:
@@ -25,7 +42,16 @@ def get_range():
         except ValueError:
             print('Wprowadz poprawna wartosc')
 
-def get_divisible_numbers(user_range, divisor):
+def get_divisible_numbers(user_range:dict, divisor:int) -> list:
+    """
+        Prompt the user to enter a numeric range.
+
+        The function asks for start and end values and ensures
+        they are not equal.
+
+        Returns:
+            dict: A dictionary with keys 'start' and 'end'.
+        """
     divisible_numbers = []
     if user_range["start"] < user_range["end"]:
         for number in range(user_range["start"], user_range["end"] + 1):
