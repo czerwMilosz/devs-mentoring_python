@@ -52,25 +52,37 @@ def get_divisible_numbers(user_range:dict, divisor:int) -> list:
         Returns:
             dict: A dictionary with keys 'start' and 'end'.
         """
-    divisible_numbers = []
-    if user_range["start"] < user_range["end"]:
-        for number in range(user_range["start"], user_range["end"] + 1):
-            if number % divisor == 0:
-                divisible_numbers.append(number)
-    else:
-        for number in range(user_range["start"], user_range["end"] -1, -1):
-            if number % divisor == 0:
-                divisible_numbers.append(number)
+    selected_range = (
+        range(user_range["start"], user_range["end"] + 1)
+        if user_range["start"] < user_range["end"] else
+        range(user_range["start"], user_range["end"] - 1, -1)
+    )
+    divisible_numbers = [number for number in selected_range if number % divisor == 0]
+
     return divisible_numbers
 
 def main():
     user_range = get_range()
     divisor = get_divisor()
-    divisible_numbers = get_divisible_numbers(user_range, divisor)
+    divisible_numbers = get_divisible_numbers(*[user_range, divisor])
     if len(divisible_numbers) != 0:
-        print(f"Liczby z zakresu {user_range['start']}:{user_range['end']} podzielne przez {divisor}: {divisible_numbers}")
+        print("Liczby z zakresu {}:{} podzielne przez {}: {}".format(
+            user_range['start'],
+            user_range['end'],
+            divisor,
+            divisible_numbers
+        ))
     else:
-        print(f"Zadna z liczb z zakresu {user_range['start']}:{user_range['end']} nie jest podzielna przez {divisor}")
+        print(
+            f"Zadna z liczb z zakresu {user_range['start']}:"
+            f"{user_range['end']} nie jest podzielna przez {divisor}"
+        )
 
 if __name__ == '__main__':
     main()
+
+
+"""print(1,2,3,4)
+print(1,2,3,4, sep=", ")
+print(1,2,3,4, end="test")
+print(1,2,3,4, sep=", ")"""
