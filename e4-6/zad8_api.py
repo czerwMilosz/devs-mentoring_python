@@ -68,8 +68,9 @@ def main():
         return None
     bmi = api_data["data"]["bmi"]
     category = api_data["data"]["category"]
-    min_ideal_weight = api_data["data"]["idealWeightRange"]["min"]
-    max_ideal_weight = api_data["data"]["idealWeightRange"]["max"]
+    range_ideal_weight = api_data["data"]["idealWeightRange"]
+    min_ideal_weight = range_ideal_weight["min"]
+    max_ideal_weight = range_ideal_weight["max"]
     print(f"BMI: {bmi}"
           f"\nCategory: {category}"
           f"\nMinimum ideal weight: {min_ideal_weight}"
