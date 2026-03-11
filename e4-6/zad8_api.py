@@ -1,8 +1,11 @@
 import requests
-from dotenv import load_dotenv
-import os
-load_dotenv()
+from pydantic import BaseModel, Field, ValidationError
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
+class Settings(BaseSettings):
+    bmi_api_key: str
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding = "utf-8")
 
 def get_float(prompt: str) -> float:
     while True:
@@ -10,31 +13,28 @@ def get_float(prompt: str) -> float:
             return float(input(prompt))
         except ValueError:
             print("Invalid input")
+class UserMetrics(BaseModel):
+    weight: float = Field(gt=0, le=300, description="Weight of the user")
+    height: float = Field(gt=2.5, description="Height of the user")
 
-def get_user_weight() -> float:
-    while True:
-        weight = get_float("Please enter your weight [kg]: ")
-        if weight <= 0:
-            print("Weight must be greater than 0")
-        elif weight > 300:
-            print("Please enter values in kilograms.")
-        else:
-            return weight
 
-def get_user_height() -> float:
+
+def get_user_metrics() -> UserMetrics:
     while True:
-        height = get_float("Please enter your height [cm]: ")
-        if height <= 0:
-            print("Height must be greater than 0")
-        elif height < 2.5:
-            print("Please enter values in cm.")
-        else:
-            return height
+        try:
+            weight = get_float("Please enter your weight [kg]: ")
+            height = get_float("Please enter your height [cm]: ")
+
+            return UserMetrics(weight = weight, height=height)
+        except ValidationError as e:
+            print(e)
+
 
 
 def get_bmi_from_api(weight: float, height: float):
     url = "https://api.apiverve.com/v1/bmicalculator"
-    api_key = os.getenv("BMI_API_KEY")
+    settings = Settings()
+    api_key = settings.bmi_api_key
     if not api_key:
         raise ValueError("BMI_API_KEY not found")
 
@@ -60,9 +60,8 @@ def get_bmi_from_api(weight: float, height: float):
 
 
 def main():
-    weight = get_user_weight()
-    height = get_user_height()
-    api_data = get_bmi_from_api(weight, height)
+    metrics = get_user_metrics()
+    api_data = get_bmi_from_api(metrics.weight, metrics.height)
     if api_data is None:
         print("Could not retrieve BMI data.")
         return None
