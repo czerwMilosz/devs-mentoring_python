@@ -16,16 +16,21 @@ def zad11_b(width = 5, height = 5):
 def zad11_c(height = 5):
     for i in range(height):
         # spacje
-        for j in range(height - i - 1):
+        for _ in range(height - i - 1):
             print(" ", end="")
 
         # gwiazdy
-        for j in range(2 * i + 1):
+        for _ in range(2 * i + 1):
             print("*", end="")
 
         print()
 
 
+def zad11_c_v2(height = 5):
+    for i in range(height):
+        print(" " * (height - i - 1) + "*" * (2 * i + 1))
+
 print(zad11_c())
+print(zad11_c_v2())
 
     

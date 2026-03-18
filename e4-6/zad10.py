@@ -44,6 +44,12 @@ def play_game(user_range: UserRange, rand_num: int) -> int:
             return user_score
         user_num = get_user_number()
 
+        # if user_num == rand_num:
+        #     return user_score
+        # user_score -= 1
+
+        # return user_score if user_num == rand_num else user_score - 1
+
         if user_num != rand_num:
             print(get_hint(rand_num, user_num))
             user_score -= 1
