@@ -1,3 +1,6 @@
+from unittest import case
+from typing import Any
+
 API_OUTPUT = {
     "data": [1, 2, "asd", [2, 3, 4, 5]],
     'nested_analysis': {
@@ -7,19 +10,26 @@ API_OUTPUT = {
     'probes': [['probe_1', 'probe_2'], 'probe_3']
 }
 
-def extract_strings(data:dict):
-    result = list()
+def extract_strings(data:Any):
 
-    if isinstance(data, str):
-        return [data]
-    elif isinstance(data, list):
-        for item in data:
-            result.extend(extract_strings(item))
-    elif isinstance(data, dict):
-        for value in data.values():
-            result.extend(extract_strings(value))
+    match data:
+        case str():
+            return [data]
+        case list():
+            return [x for item in data for x in extract_strings(item)]
+        case dict():
+            return [x for value in data.values() for x in extract_strings(value)]
+        case _:
+            return []
 
-    return result
+    # if isinstance(data, str):
+    #     return [data]
+    # elif isinstance(data, list):
+    #     return [x for item in data for x in extract_strings(item)]
+    # elif isinstance(data, dict):
+    #     return [x for value in data.values() for x in extract_strings(value)]
+    #
+    # return result
 
 def main():
     print(extract_strings(API_OUTPUT))
