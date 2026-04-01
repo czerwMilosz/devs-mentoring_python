@@ -1,10 +1,10 @@
 NUMS = [4, 6, 8, 24, 12, 2]
 
-def get_biggest_number(numbers: list):
+def get_biggest_number(numbers: list[int]) -> int:
     indexed_numbers = [(index, number) for index, number in enumerate(numbers)]
     return max(indexed_numbers, key=lambda x: x[1])[0]
 
-def get_biggest_number_v2(numbers: list):
+def get_biggest_number_v2(numbers: list[int]) -> int:
     return max(enumerate(numbers), key=lambda x: x[1])[0]
 
 
