@@ -87,6 +87,24 @@ def get_game_winner(score:list):
     else:
         return f'Remis!\nWynik:\n{format_game_score(player1_score, player2_score, draw_score)}'
 
+from enum import Enum, auto
+class Choice(Enum):
+    KAMIEN = auto()
+    PAPIER = auto()
+    NOZYCE = auto()
+
+
+def is_win(user:Choice, computer:Choice) -> bool | None:
+    if user == computer:
+        return None
+    win = {
+        Choice.KAMIEN: Choice.NOZYCE,
+        Choice.PAPIER: Choice.KAMIEN,
+        Choice.NOZYCE: Choice.PAPIER,
+    }
+    return win[user] == computer
+
+
 def main():
    round_count = get_number_of_rounds()
    game_score = play_game(round_count)
