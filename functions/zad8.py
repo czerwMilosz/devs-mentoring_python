@@ -1,6 +1,10 @@
 import datetime
-def get_clock(hour, minute):
-    return abs(30*hour - 5.5 * minute)
+def get_clock(hour, minute, second=0):
+    hour = hour % 12
+    hour_angle = 30 * hour + 0.5 * minute + second * (0.5 / 60)
+    minute_angle = 6 * minute + 0.1 * second
+    diff = abs(hour_angle - minute_angle)
+    return min(diff, 360 - diff)
 #TODO SPRAWDZIC KTORY WYNIK JEST DOBRY
 
 def get_clock_angles_from_datetime(dt):
