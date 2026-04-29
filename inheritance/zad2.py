@@ -171,3 +171,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#todo zapytac o wzorce projektowe chata
+#system design software architecture
+#dokumentacje, materialy
