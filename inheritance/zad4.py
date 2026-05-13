@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from typing import Generic, TypeVar, Type
 @dataclass
 class Note:
     title: str
@@ -12,10 +12,13 @@ class Card:
     email: str
 
 class SubManager:
+    expected_type = object
     def __init__(self):
         self.items = []
 
     def add(self, item):
+        if not isinstance(item, self.expected_type):
+            raise ValueError(f"Object must be of type {self.expected_type.__name__}")
         self.items.append(item)
 
     def show(self):
@@ -23,16 +26,33 @@ class SubManager:
             print(item)
 
 class NoteSubManager(SubManager):
-    def add(self, note:Note):
-        if not isinstance(note, Note):
-            raise ValueError("Object must be of type Note")
-        super().add(note)
+    expected_type = Note
 
 class CardSubManager(SubManager):
-    def add(self, card:Card):
-        if not isinstance(card, Card):
-            raise ValueError("Object must be of type Card")
-        super().add(card)
+    expected_type = Card
+
+T = TypeVar("T") #symbol typu, placeholder
+class GenericSubManager(Generic[T]):
+    _type: Type[T]
+    def __init__(self):
+        if not hasattr(self, "_type"):
+            raise TypeError("SubManager must have an attribute _type")
+        self.items: list[T] = []
+
+    def add(self, item: T) -> None:
+        if not isinstance(item, self._type):
+            raise TypeError(f"Expected {self._type.__name__}, got {type(item).__name__}")
+        self.items.append(item)
+
+    def show(self):
+        for item in self.items:
+            print(item)
+
+class GenericNoteSubManager(GenericSubManager[Note]):
+    _type = Note
+
+class GenericCardSubManager(GenericSubManager[Card]):
+    _type = Card
 
 class Menu:
     def show(self):
@@ -104,8 +124,11 @@ class Manager:
 
 
 def main():
-    manager = Manager()
-    manager.start()
+    # manager = Manager()
+    # manager.start()
+    card = Card("tttt", "xxx", "dddd")
+    subcard = GenericNoteSubManager()
+    subcard.add(card)
 
 if __name__ == "__main__":
     main()
